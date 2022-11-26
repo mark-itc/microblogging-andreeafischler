@@ -1,0 +1,39 @@
+.comment-box {
+    width: 600px;
+    height: 84px;
+    background-color: #343A40;
+    border-radius: 6px;
+    justify-self: center;
+    margin-top: 15px;
+    
+}
+.text-container {
+    display: flex;
+    background-color: #343A40
+}
+.text {
+    background-color: #343A40;
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.profile-name {
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: #343A40;
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 370px;
+    color: #6C757D;
+}
+.date {
+    background-color: #343A40;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #6C757D;
+}
+
