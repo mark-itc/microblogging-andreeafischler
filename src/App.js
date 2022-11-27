@@ -1,11 +1,19 @@
 import "./App.css";
 import Button from "./components/Button";
 import CommentBox from "./components/Comment-Box";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const loadedTweets = localStorage.getItem("tweets")
+    ? JSON.parse(localStorage.getItem("tweets"))
+    : [];
+
   const [text, setText] = useState("");
-  const [tweets, setTweets] = useState("");
+  const [tweets, setTweets] = useState(loadedTweets);
+
+  useEffect(() => {
+    localStorage.setItem("tweets", JSON.stringify(tweets));
+  }, [tweets]);
 
   function handleTweetOnChange(e) {
     setText(e.target.value);
@@ -13,9 +21,8 @@ function App() {
 
   function addTweetOnClick(e) {
     e.preventDefault();
-    setTweets([...tweets, { text, id: tweets.length }]);
+    setTweets([{ text, id: tweets.length }, ...tweets]);
   }
-  const isEmptyTweets = tweets.length === 0;
 
   let showError = false;
   if (text.length > 140) {
@@ -40,11 +47,9 @@ function App() {
         <Button onClick={addTweetOnClick} disabled={showError ? true : false} />
       </form>
       <div className="box-container">
-        {isEmptyTweets ? (
-          <div></div>
-        ) : (
-          tweets.map((tweet) => <CommentBox key={tweet.id} text={tweet.text} />)
-        )}
+        {tweets.map((tweet) => {
+          return <CommentBox key={tweet.id} text={tweet.text} />;
+        })}
       </div>
     </div>
   );
