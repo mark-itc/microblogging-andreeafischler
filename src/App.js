@@ -20,7 +20,6 @@ function App() {
     setDate(new Date());
   }, [tweets]);
 
-  console.log("date", date);
   function handleTweetOnChange(e) {
     setText(e.target.value);
   }
@@ -32,7 +31,7 @@ function App() {
       ...tweets,
     ]);
   }
-  console.log("randeazaaaa");
+
   let showError = false;
   if (text.length > 140) {
     showError = true;
