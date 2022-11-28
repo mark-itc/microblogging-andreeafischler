@@ -1,23 +1,17 @@
 import './Comment-Box.css'
 import { useState, useEffect } from 'react'
+import { clear } from 'localforage'
 
 function CommentBox(props) {
-    const {text} = props
-    const [date, setDate] = useState("")
-
-    useEffect(() => {
-        setDate(new Date())
-      }, [])
-
+    const {text, createdAt} = props
 
     return (
         <div className='comment-box'>
          <span className='profile-name'>Yonatan</span>
-         <span className='date'>{date.toLocaleString()}</span>
+         <span className='date'>{createdAt}</span>
          <div className='text-container'>
          <div className='text'>{text}</div>
          </div>
-         
         </div>
             
         

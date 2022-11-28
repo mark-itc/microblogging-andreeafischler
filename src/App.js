@@ -10,20 +10,29 @@ function App() {
 
   const [text, setText] = useState("");
   const [tweets, setTweets] = useState(loadedTweets);
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     localStorage.setItem("tweets", JSON.stringify(tweets));
   }, [tweets]);
 
+  useEffect(() => {
+    setDate(new Date());
+  }, [tweets]);
+
+  console.log("date", date);
   function handleTweetOnChange(e) {
     setText(e.target.value);
   }
 
   function addTweetOnClick(e) {
     e.preventDefault();
-    setTweets([{ text, id: tweets.length }, ...tweets]);
+    setTweets([
+      { text, id: tweets.length, time: date.toISOString() },
+      ...tweets,
+    ]);
   }
-
+  console.log("randeazaaaa");
   let showError = false;
   if (text.length > 140) {
     showError = true;
@@ -43,12 +52,17 @@ function App() {
             The tweet can't contain more than 140 chars
           </span>
         ) : null}
-
         <Button onClick={addTweetOnClick} disabled={showError ? true : false} />
       </form>
       <div className="box-container">
         {tweets.map((tweet) => {
-          return <CommentBox key={tweet.id} text={tweet.text} />;
+          return (
+            <CommentBox
+              key={tweet.id}
+              text={tweet.text}
+              createdAt={tweet.time}
+            />
+          );
         })}
       </div>
     </div>
