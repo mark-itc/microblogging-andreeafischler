@@ -4,7 +4,8 @@ export async function getTweetsFromServer() {
       "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet"
     );
     const results = await response.json();
-
-    console.log("results", results);
-  } catch (e) {}
+    return results.tweets;
+  } catch (e) {
+    console.error("failed on error");
+  }
 }

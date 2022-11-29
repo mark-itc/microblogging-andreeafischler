@@ -5,17 +5,14 @@ import { useEffect, useState } from "react";
 import { getTweetsFromServer } from "./services/get-tweets";
 
 function App() {
-  // const loadedTweets = localStorage.getItem("tweets")
-  //   ? JSON.parse(localStorage.getItem("tweets"))
-  //   : [];
-
   const [text, setText] = useState("");
   const [tweets, setTweets] = useState("");
   const [date, setDate] = useState(new Date());
+  const [tweetsList, setTweetsList] = useState([]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("tweets", JSON.stringify(tweets));
-  // }, [tweets]);
+  useEffect(() => {
+    getTweets();
+  }, []);
 
   useEffect(() => {
     setDate(new Date());
@@ -31,7 +28,10 @@ function App() {
       { text, id: tweets.length, createdAt: date.toISOString() },
       ...tweets,
     ]);
+    sendTweetsToServer();
+  }
 
+  const sendTweetsToServer = () => {
     fetch(
       "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet",
       {
@@ -39,35 +39,39 @@ function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           content: text,
-          userName: "Yonatan",
+          userName: "Yonathan",
           date: date.toISOString(),
         }),
       }
     ).then(() => {
-      console.log("added");
+      console.log("tweet was added");
     });
-  }
-
-  const fetchFromAPI = async () => {
-    const results = await getTweetsFromServer();
-    console.log("results", results);
+    renderTweets();
   };
 
-  fetchFromAPI();
+  const getTweets = async () => {
+    const results = await getTweetsFromServer();
+    setTweetsList(results);
+  };
 
-  // const renderTweets = () => {
-  //   return tweets.map((tweet) => {
-  //     return (
-  //       <CommentBox key={tweet.id} text={tweet.text} date={tweet.createdAt} />
-  //     );
-  //   });
-  // };
+  const renderTweets = () => {
+    getTweets();
+    return tweetsList.map((tweet) => {
+      return (
+        <CommentBox
+          key={tweet.id}
+          text={tweet.content}
+          date={tweet.date}
+          username={tweet.userName}
+        />
+      );
+    });
+  };
 
   let showError = false;
   if (text.length > 140) {
     showError = true;
   }
-  // const isEmptyNotes = tweets.length === 0;
 
   return (
     <div className="container">
@@ -85,15 +89,8 @@ function App() {
         ) : null}
         <Button onClick={addTweetOnClick} disabled={showError ? true : false} />
       </form>
-      <div className="box-container">
-        {/* {isEmptyNotes ? (
-          <div></div>
-        ) : (
-          tweets.map((tweet) => (
-            
-          ))
-        )} */}
-      </div>
+
+      <div className="box-container">{renderTweets()}</div>
     </div>
   );
 }
