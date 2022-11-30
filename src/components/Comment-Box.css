@@ -1,11 +1,20 @@
 .comment-box {
+    display: flex;
+    flex-direction: column;
     width: 600px;
-    height: 84px;
+    height: 80px;
     background-color: #343A40;
     border-radius: 6px;
     justify-self: center;
-    margin-top: 15px;
+    margin-top: 20px;
     
+    
+}
+.wrapper-profile-date {
+    display: flex;
+    background-color: #343A40;
+    justify-content: space-between;
+    border-radius: 6px;
 }
 .text-container {
     display: flex;
@@ -25,7 +34,7 @@
     background-color: #343A40;
     font-size: 14px;
     line-height: 16px;
-    margin-right: 340px;
+    
     color: #6C757D;
 }
 .date {

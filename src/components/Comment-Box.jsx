@@ -6,8 +6,10 @@ function CommentBox(props) {
 
     return (
         <div className='comment-box'>
-         <span className='profile-name'>{username}</span>
+        <div className='wrapper-profile-date'>
+        <span className='profile-name'>{username}</span>
          <span className='date'>{date}</span>
+         </div>
          <div className='text-container'>
          <div className='text'>{text}</div>
          </div>
