@@ -3,51 +3,43 @@
   margin: 0;
   box-sizing: border-box;
   background-color: #181c2c;
- 
-  
 }
-.container {
+
+.App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-items: center;
+}
+.navbar {
+  display: flex;
+  align-self: center;
   align-items: center;
-}
-.form {
-  display: flex;
-  /* justify-content: center; */
-  width: 600px;
-  height: 180px;
-  
-  
-}
-.box-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.custom-input {
-  width: 600px;
-  height: 180px;
-  margin-top: 5px;
-  border: 2px solid #CCCCCC;
+  background-color: #343A40;
+  width: 1076px;
+  height: 58px;
+  margin-bottom: 50px;
   border-radius: 6px;
-  padding: 10px;
-  position: absolute;
-  font-style: normal;
-  font-weight: 400px;
-  font-size: 16px;
-  line-height: 19px;
-  color: #CCCCCC;
-  
 }
-.error-message {
-  color: #841f2d;
-  position: absolute;
-  justify-self: center;
-  margin-top: 133px;
-  margin-left: 20px;
-  background-color: #fed5da;
-  border-radius: 3px;
-  font-size: 14px;
-  padding: 5px;
+
+.home {
+  margin-left: 50px;
+}
+.home-button {
+  text-decoration: none;
+  background-color: #343A40;
+  color: rgba(255, 255, 255, 0.5)
+}
+.home-button:active {
+  color: #FFFFFF;
+}
+.profile{
+  margin-left: 50px;
+}
+.profile-button {
+  text-decoration: none;
+  background-color: #343A40;
+  color: rgba(255, 255, 255, 0.5)
+}
+.profile-button:active {
+  color: #FFFFFF;
 }

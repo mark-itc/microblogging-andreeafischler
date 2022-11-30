@@ -8,10 +8,14 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="home">
-          <Link to="/home">Home</Link>
+          <Link className="home-button" to="/home">
+            Home
+          </Link>
         </div>
         <div className="profile">
-          <Link to="/profile">Profile</Link>
+          <Link className="profile-button" to="/profile">
+            Profile
+          </Link>
         </div>
       </nav>
       <Routes>

@@ -1,4 +1,5 @@
  import "../App.css"
+ import "./Home.css"
  import Button from "../components/Button"
  import CommentBox  from "../components/Comment-Box";
  import { useEffect, useState } from 'react';
