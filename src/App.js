@@ -9,11 +9,12 @@ function App() {
   const [tweets, setTweets] = useState("");
   const [date, setDate] = useState(new Date());
   const [tweetsList, setTweetsList] = useState([]);
-  console.log("aaa");
+
+  console.log("tweetsList", tweetsList);
 
   useEffect(() => {
     getTweets();
-  }, []);
+  }, [text, date]);
 
   useEffect(() => {
     setDate(new Date());
@@ -40,18 +41,17 @@ function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           content: text,
-          userName: "Yonathan",
+          userName: "JYMMY",
           date: date.toISOString(),
         }),
       }
     )
       .then(() => {
-        console.log("tweet was added");
+        getTweets();
       })
       .catch((e) => {
         console.error(e);
       });
-    renderTweets();
   };
 
   const getTweets = async () => {
