@@ -9,6 +9,7 @@ function App() {
   const [tweets, setTweets] = useState("");
   const [date, setDate] = useState(new Date());
   const [tweetsList, setTweetsList] = useState([]);
+  console.log("aaa");
 
   useEffect(() => {
     getTweets();
@@ -43,9 +44,13 @@ function App() {
           date: date.toISOString(),
         }),
       }
-    ).then(() => {
-      console.log("tweet was added");
-    });
+    )
+      .then(() => {
+        console.log("tweet was added");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
     renderTweets();
   };
 
@@ -55,7 +60,6 @@ function App() {
   };
 
   const renderTweets = () => {
-    getTweets();
     return tweetsList.map((tweet) => {
       return (
         <CommentBox
