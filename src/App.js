@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 
@@ -8,14 +8,14 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="home">
-          <Link className="home-button" to="/home">
+          <NavLink to="/home" className="home-button">
             Home
-          </Link>
+          </NavLink>
         </div>
         <div className="profile">
-          <Link className="profile-button" to="/profile">
+          <NavLink className="profile-button" to="/profile">
             Profile
-          </Link>
+          </NavLink>
         </div>
       </nav>
       <Routes>

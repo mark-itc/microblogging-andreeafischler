@@ -93,9 +93,10 @@
               The tweet can't contain more than 140 chars
             </span>
           ) : null}
-          <Button onClick={addTweetOnClick} disabled={showError ? true : false} />
+          <div className="button-wrapper">
+          <Button text="Tweet"onClick={addTweetOnClick} disabled={showError ? true : false} />
+          </div>
         </form>
-  
         <div className="box-container">{renderTweets()}</div>
       </div>
 

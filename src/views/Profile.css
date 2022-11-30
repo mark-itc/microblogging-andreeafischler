@@ -1,0 +1,39 @@
+.username-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+.username{
+    display: flex;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+    border: 2px solid #CCCCCC;
+    border-radius: 6px;
+    position: relative;
+    color: #FFFFFF;
+   padding-left: 20px;
+}
+.profile-form {
+    margin-top: 40px;
+}
+.title-container {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 61px;
+
+}
+.profile-title {
+    align-self: flex-start;
+    margin-bottom: 35px;
+    color: #FFFFFF;
+    font-size: 34px;
+    
+}
+.profile-username {
+    align-self: flex-start;
+    color: #FFFFFF;
+}

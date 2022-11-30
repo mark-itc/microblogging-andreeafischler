@@ -1,12 +1,12 @@
 import "./Button.css"
 
 function Button(props) {
-     const { onClick, disabled } = props
+     const { onClick, disabled, text } = props
 
     return (
         <div>
         <button className="tweet-button" onClick={onClick} disabled={disabled}>  
-        Tweet 
+        {text}
          </button>
         </div>
             
