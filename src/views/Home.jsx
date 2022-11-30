@@ -5,14 +5,14 @@
  import { useEffect, useState } from 'react';
  import { getTweetsFromServer} from "../services/get-tweets"
 
+
  function Home() {
+
     const [text, setText] = useState("");
     const [tweets, setTweets] = useState("");
     const [date, setDate] = useState(new Date());
     const [tweetsList, setTweetsList] = useState([]);
-  
-    console.log("tweetsList", tweetsList);
-  
+    
     useEffect(() => {
       getTweets();
     }, [text, date]);
@@ -20,7 +20,8 @@
     useEffect(() => {
       setDate(new Date());
     }, [tweets]);
-  
+
+    
     function handleTweetOnChange(e) {
       setText(e.target.value);
     }
@@ -33,8 +34,12 @@
       ]);
       sendTweetsToServer();
     }
-  
+    
+    const savedUserName = localStorage.getItem("userName") ? 
+       JSON.parse(localStorage.getItem("userName")) : []
+
     const sendTweetsToServer = () => {
+      
       fetch(
         "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet",
         {
@@ -42,7 +47,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             content: text,
-            userName: "JYMMY",
+            userName: savedUserName,
             date: date.toISOString(),
           }),
         }
@@ -81,6 +86,7 @@
 
     return(
         <div className="container">
+          
         <form className="form">
           <textarea
             className="custom-input"

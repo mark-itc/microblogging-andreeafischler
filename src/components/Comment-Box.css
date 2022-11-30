@@ -15,6 +15,7 @@
     background-color: #343A40;
     justify-content: space-between;
     border-radius: 6px;
+    
 }
 .text-container {
     display: flex;
@@ -30,7 +31,7 @@
 
 .profile-name {
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color: #343A40;
     font-size: 14px;
     line-height: 16px;
@@ -40,7 +41,7 @@
 .date {
     background-color: #343A40;
     margin-right: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 14px;
     line-height: 16px;
     color: #6C757D;
