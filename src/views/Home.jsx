@@ -2,44 +2,48 @@
  import "./Home.css"
  import Button from "../components/Button"
  import CommentBox  from "../components/Comment-Box";
- import { useEffect, useState } from 'react';
+ import { useEffect, useState, useContext } from 'react';
  import { getTweetsFromServer} from "../services/get-tweets"
+ import { sendTweetsToServer } from "../services/TweetsContext"
+ import LoadingSpinner  from "../components/LoadingSpinner";
+ import { TweetsContext } from "../services/TweetsContext"
+
 
 
  function Home() {
 
-    const [text, setText] = useState("");
-    const [tweets, setTweets] = useState("");
-    const [date, setDate] = useState(new Date());
-    const [tweetsList, setTweetsList] = useState([]);
+    const { tweetsList, setTweetsList } = useContext(TweetsContext)
     
-    useEffect(() => {
-      getTweets();
-    }, [text, date]);
-  
-    useEffect(() => {
-      setDate(new Date());
-    }, [tweets]);
+    const [text, setText] = useState("");
+    const [tweets, setTweets] = useState(tweetsList);
+    const [date, setDate] = useState(new Date());
+    const [isLoading, setIsLoading] = useState(false);
 
     
+    useEffect(() => {
+      setDate(new Date());
+    },[text])
+     
+     
+    const savedUserName =  JSON.parse(localStorage.getItem("userName"))
+
+    useEffect(() => {
+      setTweets([
+        { text, id: tweets.length, savedUserName, createdAt: date.toISOString() },
+        ...tweets,
+      ]);
+    },[text])
+ 
     function handleTweetOnChange(e) {
       setText(e.target.value);
     }
-  
+   
     function addTweetOnClick(e) {
       e.preventDefault();
-      setTweets([
-        { text, id: tweets.length, createdAt: date.toISOString() },
-        ...tweets,
-      ]);
-      sendTweetsToServer();
+      sendTweetsToServer()
     }
-    
-    const savedUserName = localStorage.getItem("userName") ? 
-       JSON.parse(localStorage.getItem("userName")) : []
 
     const sendTweetsToServer = () => {
-      
       fetch(
         "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet",
         {
@@ -53,18 +57,20 @@
         }
       )
         .then(() => {
-          getTweets();
+         getTweets()
         })
         .catch((e) => {
           console.error(e);
         });
     };
-  
+
     const getTweets = async () => {
+      setIsLoading(true)
       const results = await getTweetsFromServer();
       setTweetsList(results);
+      setIsLoading(false)
     };
-  
+
     const renderTweets = () => {
       return tweetsList.map((tweet) => {
         return (
@@ -77,7 +83,7 @@
         );
       });
     };
-  
+    
     let showError = false;
     if (text.length > 140) {
       showError = true;
@@ -86,7 +92,7 @@
 
     return(
         <div className="container">
-          
+
         <form className="form">
           <textarea
             className="custom-input"
@@ -103,7 +109,7 @@
           <Button text="Tweet"onClick={addTweetOnClick} disabled={showError ? true : false} />
           </div>
         </form>
-        <div className="box-container">{renderTweets()}</div>
+        <div className="box-container">{isLoading ? <LoadingSpinner/> : renderTweets()}</div>
       </div>
 
     )
