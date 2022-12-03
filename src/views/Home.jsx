@@ -9,6 +9,7 @@
  import { TweetsContext } from "../services/TweetsContext"
 
 
+let renderTweetsTimeout;
 
  function Home() {
 
@@ -24,6 +25,13 @@
       setDate(new Date());
     },[text])
      
+    useEffect(() => {
+      const interval = setInterval(() => {
+        console.log("get tweets, activate")
+        getTweets()
+      }, 20000);
+      return () => clearInterval(interval)
+    },[])
      
     const savedUserName =  JSON.parse(localStorage.getItem("userName"))
 
@@ -42,7 +50,8 @@
       e.preventDefault();
       sendTweetsToServer()
     }
-
+    
+    
     const sendTweetsToServer = () => {
       fetch(
         "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet",
@@ -63,6 +72,7 @@
           console.error(e);
         });
     };
+    
 
     const getTweets = async () => {
       setIsLoading(true)
@@ -89,7 +99,6 @@
       showError = true;
     }
   
-
     return(
         <div className="container">
 
