@@ -9,8 +9,6 @@
  import { TweetsContext } from "../services/TweetsContext"
 
 
-let renderTweetsTimeout;
-
  function Home() {
 
     const { tweetsList, setTweetsList } = useContext(TweetsContext)
@@ -20,21 +18,20 @@ let renderTweetsTimeout;
     const [date, setDate] = useState(new Date());
     const [isLoading, setIsLoading] = useState(false);
 
-    
     useEffect(() => {
       setDate(new Date());
     },[text])
-     
+    
     useEffect(() => {
-      const interval = setInterval(() => {
-        console.log("get tweets, activate")
+        const interval = setInterval(() => {
+        console.log("update tweets List")
         getTweets()
       }, 20000);
       return () => clearInterval(interval)
     },[])
      
     const savedUserName =  JSON.parse(localStorage.getItem("userName"))
-
+    
     useEffect(() => {
       setTweets([
         { text, id: tweets.length, savedUserName, createdAt: date.toISOString() },
@@ -50,7 +47,6 @@ let renderTweetsTimeout;
       e.preventDefault();
       sendTweetsToServer()
     }
-    
     
     const sendTweetsToServer = () => {
       fetch(
@@ -118,7 +114,7 @@ let renderTweetsTimeout;
           <Button text="Tweet"onClick={addTweetOnClick} disabled={showError ? true : false} />
           </div>
         </form>
-        <div className="box-container">{isLoading ? <LoadingSpinner/> : renderTweets()}</div>
+        <div className="box-container">{renderTweets()}</div>
       </div>
 
     )
