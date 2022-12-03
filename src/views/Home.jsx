@@ -7,6 +7,7 @@
  import { sendTweetsToServer } from "../services/TweetsContext"
  import LoadingSpinner  from "../components/LoadingSpinner";
  import { TweetsContext } from "../services/TweetsContext"
+import { render } from "@testing-library/react";
 
 
  function Home() {
@@ -75,6 +76,7 @@
       const results = await getTweetsFromServer();
       setTweetsList(results);
       setIsLoading(false)
+      
     };
 
     const renderTweets = () => {
