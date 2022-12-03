@@ -30,6 +30,9 @@
   color: rgba(255, 255, 255, 0.5)
 }
 
+.home-button.active {
+  color: #FFFFFF;
+}
 
 .profile{
   margin-left: 50px;
@@ -39,8 +42,6 @@
   background-color: #343A40;
   color: rgba(255, 255, 255, 0.5)
 }
-.profile-button-active {
-  text-decoration: none;
-  background-color: #343A40;
+.profile-button.active {
   color: #FFFFFF;
 }
